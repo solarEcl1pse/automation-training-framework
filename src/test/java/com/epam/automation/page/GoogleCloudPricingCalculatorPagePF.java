@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -57,6 +58,8 @@ public class GoogleCloudPricingCalculatorPagePF {
     private WebElement totalCost;
     @FindBy(xpath = "//*[@id=\"email_quote\"]")
     private WebElement emailEstimateButton;
+    @FindBy(xpath = "//form[@name='emailForm']//input[@id='input_480']")
+    private WebElement emailForm;
     @FindBy(xpath = "//form[@name='emailForm']//input[@type='email']")
     private WebElement emailInput;
     @FindBy(xpath = "//button[contains(text(),'Send Email')]")
@@ -188,6 +191,7 @@ public class GoogleCloudPricingCalculatorPagePF {
     }
 
     public GoogleCloudPricingCalculatorPagePF pasteEmail(String value) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", emailForm);
         waitForElementToBeClickable(driver, emailInput);
         emailInput.click();
         emailInput.sendKeys(value);

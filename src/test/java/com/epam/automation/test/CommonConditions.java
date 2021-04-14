@@ -14,13 +14,11 @@ public class CommonConditions {
 
     @BeforeMethod()
     public void setUp() {
-        System.setProperty("environment", "qa");
-        System.setProperty("browser", "chrome");
         driver = DriverSingleton.getDriver();
     }
 
     @AfterMethod(alwaysRun = true)
     public void stopBrowser() {
-        //DriverSingleton.closeDriver();
+        DriverSingleton.closeDriver();
     }
 }

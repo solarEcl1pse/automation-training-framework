@@ -5,6 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,6 +26,8 @@ public class TenMineMailPagePF {
     private String emailAddress;
     @FindBy(xpath = "//*[@id=\"mail\"]")
     private WebElement emailAddressField;
+    @FindBy(xpath = "//div[@class='inbox-area maillist']")
+    private WebElement emailList;
     @FindBy(xpath = "//span[contains(text(), 'Google Cloud Sales')]/..")
     private WebElement email;
     @FindBy(xpath = "//td[contains(text(),'USD')]")
@@ -54,6 +57,7 @@ public class TenMineMailPagePF {
     }
 
     public TenMineMailPagePF waitForEmail() {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", emailList);
         logger.info("Waiting for incoming email...");
         new FluentWait(driver)
                 .withTimeout(Duration.ofSeconds(20))
@@ -69,10 +73,9 @@ public class TenMineMailPagePF {
         return this;
     }
 
-    public TenMineMailPagePF openEmail() {
+    public void openEmail() {
         email.click();
         logger.info("Opening email...");
-        return this;
     }
 
     public String getTotalCost() {
