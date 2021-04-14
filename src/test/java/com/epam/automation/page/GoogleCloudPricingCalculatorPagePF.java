@@ -189,7 +189,7 @@ public class GoogleCloudPricingCalculatorPagePF {
     }
 
     public GoogleCloudPricingCalculatorPagePF pasteEmail(String value) {
-        ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight / 2)");
+        ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight / 3 )");
         waitForElementToBeClickable(driver, emailInput);
         emailInput.click();
         emailInput.sendKeys(value);
