@@ -58,8 +58,6 @@ public class GoogleCloudPricingCalculatorPagePF {
     private WebElement totalCost;
     @FindBy(xpath = "//*[@id=\"email_quote\"]")
     private WebElement emailEstimateButton;
-    @FindBy(xpath = "//form[@name='emailForm']//input[@id='input_480']")
-    private WebElement emailForm;
     @FindBy(xpath = "//form[@name='emailForm']//input[@type='email']")
     private WebElement emailInput;
     @FindBy(xpath = "//button[contains(text(),'Send Email')]")
@@ -191,7 +189,7 @@ public class GoogleCloudPricingCalculatorPagePF {
     }
 
     public GoogleCloudPricingCalculatorPagePF pasteEmail(String value) {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", emailForm);
+        ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight / 2)");
         waitForElementToBeClickable(driver, emailInput);
         emailInput.click();
         emailInput.sendKeys(value);
